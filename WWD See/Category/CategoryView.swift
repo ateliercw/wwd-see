@@ -15,7 +15,17 @@ struct CategoryView: View {
     var body: some View {
         List {
             ForEach(category.videos) { video in
-                Text(video.name)
+                Button {
+                    video.watched.toggle()
+                } label: {
+                    HStack {
+                        Text(video.name)
+                        if video.watched {
+                            Spacer()
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                }
             }
         }
         .navigationTitle(category.name)

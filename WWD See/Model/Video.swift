@@ -14,8 +14,8 @@ final class Video {
     var id: URL { url }
     let name: String
     let url: URL
-    
     var category: Category!
+    var watched: Bool = false
 
     init(name: String, url: URL) {
         self.url = url

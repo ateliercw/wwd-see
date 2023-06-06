@@ -21,7 +21,7 @@ struct RootView: View {
                     } label: {
                         VStack(alignment: .leading) {
                             Text(category.name)
-                            Text("0 / \(category.videos.count)")
+                            Text("\(category.viewedCount) / \(category.videos.count)")
                                 .foregroundStyle(.secondary)
                                 .font(.caption)
                         }
@@ -38,6 +38,12 @@ struct RootView: View {
                 fatalError(error.localizedDescription)
             }
         }
+    }
+}
+
+extension Category {
+    var viewedCount: Int {
+        videos.filter(\.watched).count
     }
 }
 

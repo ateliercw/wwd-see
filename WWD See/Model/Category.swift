@@ -14,7 +14,6 @@ import AppKit
 #endif
 import WWDCData
 
-
 @Model
 final class Category {
     var id: URL { url }
