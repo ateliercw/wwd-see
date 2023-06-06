@@ -41,12 +41,6 @@ struct RootView: View {
     }
 }
 
-extension Category {
-    var viewedCount: Int {
-        videos.filter(\.watched).count
-    }
-}
-
 #Preview {
     RootView()
         .modelContainer(for: Category.self, inMemory: true)

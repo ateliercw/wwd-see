@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3D1556622A2F5FE400FA966E /* WWDCData in Frameworks */ = {isa = PBXBuildFile; productRef = 3D1556612A2F5FE400FA966E /* WWDCData */; };
 		3D1556642A2F64F500FA966E /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1556632A2F64F500FA966E /* Video.swift */; };
 		3D538E372A2F7408006BF064 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D538E362A2F7408006BF064 /* CategoryView.swift */; };
+		3D538E3C2A2F7CBF006BF064 /* Category+Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D538E3B2A2F7CBF006BF064 /* Category+Import.swift */; };
+		3D538E3F2A2F7D4A006BF064 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D538E3E2A2F7D4A006BF064 /* VideoView.swift */; };
 		3DBD88FF2A2F563F003BEAAA /* WWDSeeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD88FE2A2F563F003BEAAA /* WWDSeeApp.swift */; };
 		3DBD89012A2F563F003BEAAA /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD89002A2F563F003BEAAA /* Category.swift */; };
 		3DBD89032A2F563F003BEAAA /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD89022A2F563F003BEAAA /* RootView.swift */; };
@@ -20,6 +21,9 @@
 /* Begin PBXFileReference section */
 		3D1556632A2F64F500FA966E /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		3D538E362A2F7408006BF064 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
+		3D538E3B2A2F7CBF006BF064 /* Category+Import.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+Import.swift"; sourceTree = "<group>"; };
+		3D538E3E2A2F7D4A006BF064 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
+		3D538E442A2F7EDA006BF064 /* WWDC - TLDW */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "WWDC - TLDW"; sourceTree = "<group>"; };
 		3DBD88FB2A2F563F003BEAAA /* WWD See.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WWD See.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DBD88FE2A2F563F003BEAAA /* WWDSeeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WWDSeeApp.swift; sourceTree = "<group>"; };
 		3DBD89002A2F563F003BEAAA /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -28,7 +32,6 @@
 		3DBD89062A2F5640003BEAAA /* WWD_See.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WWD_See.entitlements; sourceTree = "<group>"; };
 		3DBD89082A2F5640003BEAAA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3DBD890A2A2F5640003BEAAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3DBD89102A2F5702003BEAAA /* WWDC - TLDW */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "WWDC - TLDW"; path = "../../Downloads/WWDC - TLDW"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,7 +39,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D1556622A2F5FE400FA966E /* WWDCData in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,10 +60,18 @@
 			path = Category;
 			sourceTree = "<group>";
 		};
+		3D538E3D2A2F7D2D006BF064 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				3D538E3E2A2F7D4A006BF064 /* VideoView.swift */,
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
 		3DBD88F22A2F563F003BEAAA = {
 			isa = PBXGroup;
 			children = (
-				3DBD89102A2F5702003BEAAA /* WWDC - TLDW */,
+				3D538E442A2F7EDA006BF064 /* WWDC - TLDW */,
 				3DBD88FD2A2F563F003BEAAA /* WWD See */,
 				3DBD88FC2A2F563F003BEAAA /* Products */,
 				3D1556602A2F5FE400FA966E /* Frameworks */,
@@ -80,11 +90,12 @@
 			isa = PBXGroup;
 			children = (
 				3D538E352A2F73FA006BF064 /* Category */,
-				3DBD88FE2A2F563F003BEAAA /* WWDSeeApp.swift */,
-				3DBD89112A2F58CE003BEAAA /* Model */,
-				3DBD89132A2F5B74003BEAAA /* Root */,
 				3DBD89122A2F5A3A003BEAAA /* Content */,
+				3DBD89112A2F58CE003BEAAA /* Model */,
 				3DBD89072A2F5640003BEAAA /* Preview Content */,
+				3DBD89132A2F5B74003BEAAA /* Root */,
+				3D538E3D2A2F7D2D006BF064 /* Video */,
+				3DBD88FE2A2F563F003BEAAA /* WWDSeeApp.swift */,
 			);
 			path = "WWD See";
 			sourceTree = "<group>";
@@ -102,6 +113,7 @@
 			children = (
 				3DBD89002A2F563F003BEAAA /* Category.swift */,
 				3D1556632A2F64F500FA966E /* Video.swift */,
+				3D538E3B2A2F7CBF006BF064 /* Category+Import.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -142,7 +154,6 @@
 			);
 			name = "WWD See";
 			packageProductDependencies = (
-				3D1556612A2F5FE400FA966E /* WWDCData */,
 			);
 			productName = "WWD See";
 			productReference = 3DBD88FB2A2F563F003BEAAA /* WWD See.app */;
@@ -201,6 +212,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D538E3C2A2F7CBF006BF064 /* Category+Import.swift in Sources */,
+				3D538E3F2A2F7D4A006BF064 /* VideoView.swift in Sources */,
 				3DBD89012A2F563F003BEAAA /* Category.swift in Sources */,
 				3D1556642A2F64F500FA966E /* Video.swift in Sources */,
 				3DBD88FF2A2F563F003BEAAA /* WWDSeeApp.swift in Sources */,
@@ -446,10 +459,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3D1556612A2F5FE400FA966E /* WWDCData */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = WWDCData;
-		};
 		3D538E392A2F779D006BF064 /* SwiftLintPlugin */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3D538E382A2F778B006BF064 /* XCRemoteSwiftPackageReference "SwiftLint" */;

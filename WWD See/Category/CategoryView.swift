@@ -9,8 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct CategoryView: View {
-    @Environment(\.modelContext) private var modelContext
-    var category: Category
+    let category: Category
 
     var body: some View {
         List {

@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftData
-import WWDCData
 
 @Model
 final class Video {
@@ -16,6 +15,7 @@ final class Video {
     let url: URL
     var category: Category!
     var watched: Bool = false
+    var excluded: Bool = false
 
     init(name: String, url: URL) {
         self.url = url

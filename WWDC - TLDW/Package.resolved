@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser",
+      "state" : {
+        "revision" : "fee6933f37fde9a5e12a1e4aeaa93fe60116ff2a",
+        "version" : "1.2.2"
+      }
+    },
+    {
+      "identity" : "swift-html-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/rnantes/swift-html-parser.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "38f708b622118bdf742b1b502d4cfa5aa3d9a8dd"
+      }
+    }
+  ],
+  "version" : 2
+}
