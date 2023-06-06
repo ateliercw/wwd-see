@@ -11,6 +11,7 @@
 		3D538E372A2F7408006BF064 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D538E362A2F7408006BF064 /* CategoryView.swift */; };
 		3D538E3C2A2F7CBF006BF064 /* Category+Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D538E3B2A2F7CBF006BF064 /* Category+Import.swift */; };
 		3D538E3F2A2F7D4A006BF064 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D538E3E2A2F7D4A006BF064 /* VideoView.swift */; };
+		3D538E462A2F7FDC006BF064 /* WWDCData in Frameworks */ = {isa = PBXBuildFile; productRef = 3D538E452A2F7FDC006BF064 /* WWDCData */; };
 		3DBD88FF2A2F563F003BEAAA /* WWDSeeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD88FE2A2F563F003BEAAA /* WWDSeeApp.swift */; };
 		3DBD89012A2F563F003BEAAA /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD89002A2F563F003BEAAA /* Category.swift */; };
 		3DBD89032A2F563F003BEAAA /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD89022A2F563F003BEAAA /* RootView.swift */; };
@@ -39,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D538E462A2F7FDC006BF064 /* WWDCData in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,6 +156,7 @@
 			);
 			name = "WWD See";
 			packageProductDependencies = (
+				3D538E452A2F7FDC006BF064 /* WWDCData */,
 			);
 			productName = "WWD See";
 			productReference = 3DBD88FB2A2F563F003BEAAA /* WWD See.app */;
@@ -463,6 +466,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3D538E382A2F778B006BF064 /* XCRemoteSwiftPackageReference "SwiftLint" */;
 			productName = "plugin:SwiftLintPlugin";
+		};
+		3D538E452A2F7FDC006BF064 /* WWDCData */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WWDCData;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

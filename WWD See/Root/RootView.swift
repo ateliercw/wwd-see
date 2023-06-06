@@ -21,7 +21,7 @@ struct RootView: View {
                     } label: {
                         VStack(alignment: .leading) {
                             Text(category.name)
-                            Text("\(category.viewedCount) / \(category.videos.count)")
+                            Text("\(category.viewedCount) / \(category.toWatchCount)")
                                 .foregroundStyle(.secondary)
                                 .font(.caption)
                         }

@@ -14,20 +14,24 @@ struct CategoryView: View {
     var body: some View {
         List {
             ForEach(category.videos) { video in
-                Button {
-                    video.watched.toggle()
-                } label: {
-                    HStack {
-                        Text(video.name)
-                        if video.watched {
-                            Spacer()
-                            Image(systemName: "checkmark")
-                        }
-                    }
+                NavigationLink("\(video.symbol) \(video.name)") {
+                    VideoView(video: video)
                 }
             }
         }
         .navigationTitle(category.name)
+    }
+}
+
+extension Video {
+    var symbol: Image {
+        if excluded {
+            Image(systemName: "xmark")
+        } else if watched {
+            Image(systemName: "checkmark")
+        } else {
+            Image(systemName: "circle")
+        }
     }
 }
 

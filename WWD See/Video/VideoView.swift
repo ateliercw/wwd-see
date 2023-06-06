@@ -12,21 +12,34 @@ struct VideoView: View {
 
     var body: some View {
         List {
+            Text(video.name)
+                .font(.title)
             Section {
                 Button {
-
+                    video.watched.toggle()
                 } label: {
-
+                    HStack {
+                        Text("Watched")
+                        if video.watched {
+                            Spacer()
+                            Image(systemName: "checkmark")
+                        }
+                    }
                 }
             }
             Section {
-
+                Button {
+                    video.excluded.toggle()
+                } label: {
+                    HStack {
+                        Text("Excluded")
+                        if video.excluded {
+                            Spacer()
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                }
             }
         }
-        .navigationTitle(video.name)
     }
 }
-
-//#Preview {
-//    VideoView()
-//}
