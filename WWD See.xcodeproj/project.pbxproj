@@ -12,6 +12,7 @@
 		3D538E3C2A2F7CBF006BF064 /* Category+Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D538E3B2A2F7CBF006BF064 /* Category+Import.swift */; };
 		3D538E3F2A2F7D4A006BF064 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D538E3E2A2F7D4A006BF064 /* VideoView.swift */; };
 		3D538E462A2F7FDC006BF064 /* WWDCData in Frameworks */ = {isa = PBXBuildFile; productRef = 3D538E452A2F7FDC006BF064 /* WWDCData */; };
+		3D538E492A2F8398006BF064 /* ViewingProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D538E482A2F8398006BF064 /* ViewingProgress.swift */; };
 		3DBD88FF2A2F563F003BEAAA /* WWDSeeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD88FE2A2F563F003BEAAA /* WWDSeeApp.swift */; };
 		3DBD89012A2F563F003BEAAA /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD89002A2F563F003BEAAA /* Category.swift */; };
 		3DBD89032A2F563F003BEAAA /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD89022A2F563F003BEAAA /* RootView.swift */; };
@@ -25,6 +26,7 @@
 		3D538E3B2A2F7CBF006BF064 /* Category+Import.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+Import.swift"; sourceTree = "<group>"; };
 		3D538E3E2A2F7D4A006BF064 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		3D538E442A2F7EDA006BF064 /* WWDC - TLDW */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "WWDC - TLDW"; sourceTree = "<group>"; };
+		3D538E482A2F8398006BF064 /* ViewingProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewingProgress.swift; sourceTree = "<group>"; };
 		3DBD88FB2A2F563F003BEAAA /* WWD See.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WWD See.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DBD88FE2A2F563F003BEAAA /* WWDSeeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WWDSeeApp.swift; sourceTree = "<group>"; };
 		3DBD89002A2F563F003BEAAA /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -70,6 +72,14 @@
 			path = Video;
 			sourceTree = "<group>";
 		};
+		3D538E472A2F8383006BF064 /* Sharing */ = {
+			isa = PBXGroup;
+			children = (
+				3D538E482A2F8398006BF064 /* ViewingProgress.swift */,
+			);
+			path = Sharing;
+			sourceTree = "<group>";
+		};
 		3DBD88F22A2F563F003BEAAA = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +106,7 @@
 				3DBD89112A2F58CE003BEAAA /* Model */,
 				3DBD89072A2F5640003BEAAA /* Preview Content */,
 				3DBD89132A2F5B74003BEAAA /* Root */,
+				3D538E472A2F8383006BF064 /* Sharing */,
 				3D538E3D2A2F7D2D006BF064 /* Video */,
 				3DBD88FE2A2F563F003BEAAA /* WWDSeeApp.swift */,
 			);
@@ -221,6 +232,7 @@
 				3D1556642A2F64F500FA966E /* Video.swift in Sources */,
 				3DBD88FF2A2F563F003BEAAA /* WWDSeeApp.swift in Sources */,
 				3DBD89032A2F563F003BEAAA /* RootView.swift in Sources */,
+				3D538E492A2F8398006BF064 /* ViewingProgress.swift in Sources */,
 				3D538E372A2F7408006BF064 /* CategoryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

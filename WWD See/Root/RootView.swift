@@ -29,6 +29,11 @@ struct RootView: View {
                 }
             }
             .navigationTitle("WWD See")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    ShareLink(item: ViewingProgress(categories: categories), preview: SharePreview("Share progress"))
+                }
+            }
         }
         .task {
             guard categories.isEmpty else { return }

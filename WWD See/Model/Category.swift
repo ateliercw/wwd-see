@@ -24,7 +24,7 @@ final class Category {
 
 extension Category {
     var viewedCount: Int {
-        videos.filter(\.watched).count
+        videos.filter { !$0.excluded }.filter(\.watched).count
     }
 
     var toWatchCount: Int {
