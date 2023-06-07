@@ -11,14 +11,14 @@ import SwiftData
 @Model
 final class Category {
     var id: URL { url }
-    let url: URL
+    @Attribute(.unique) let url: URL
     let name: String
-    @Relationship(inverse: \Video.category) private(set) var videos: [Video]
+    @Relationship(inverse: \Video.categories) var videos: [Video]
 
-    init(url: URL, name: String, videos: [Video]) {
+    init(url: URL, name: String, videos: [Video]? = nil) {
         self.url = url
         self.name = name
-        self.videos = videos
+        self.videos = videos ?? []
     }
 }
 

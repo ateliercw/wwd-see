@@ -12,10 +12,12 @@ import SwiftData
 final class Video {
     var id: URL { url }
     let name: String
-    let url: URL
-    var category: Category!
+    @Attribute(.unique) let url: URL
+    var categories: [Category]
     var watched: Bool = false
     var excluded: Bool = false
+
+    var included: Bool { !excluded }
 
     init(name: String, url: URL) {
         self.url = url

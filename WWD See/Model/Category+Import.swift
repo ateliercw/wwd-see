@@ -27,12 +27,19 @@ extension ModelContext {
         }
         let completedTopics = try JSONDecoder().decode([CompleteTopic].self, from: rawData)
         for wrapper in completedTopics {
-            let videos = wrapper.videos.map(Video.init)
-            let category = Category(url: wrapper.topic.url, name: wrapper.topic.name, videos: videos)
+            let category = Category(url: wrapper.topic.url, name: wrapper.topic.name)
             self.insert(object: category)
-            for video in category.videos {
-                video.category = category
-                self.insert(object: video)
+            for apiVideo in wrapper.videos {
+                let videoPredicate = #Predicate<Video> { $0.url == apiVideo.url }
+                var videoFetch = FetchDescriptor(predicate: videoPredicate)
+                videoFetch.fetchLimit = 1
+                if let video = (try? fetch(videoFetch))?.first {
+                    video.categories.append(category)
+                } else {
+                    let video = Video(video: apiVideo)
+                    video.categories.append(category)
+                    self.insert(object: video)
+                }
             }
         }
     }

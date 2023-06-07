@@ -15,6 +15,6 @@ struct WWDSeeApp: App {
         WindowGroup {
             RootView()
         }
-        .modelContainer(for: Category.self)
+        .modelContainer(for: [Category.self, Video.self])
     }
 }
