@@ -10,22 +10,26 @@ import SwiftData
 
 struct RootView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var categories: [Category]
+    @Query(sort: \Category.name) private var categories: [Category]
+    @State private var searchText: String = ""
 
     var body: some View {
         NavigationStack {
             List {
                 ProgressSummary()
-                ForEach(categories) { category in
+                ForEach(categories.filteredBy(searchText)) { category in
                     Section {
-                        ForEach(category.videos) { video in
-                            VideoCell(video: video)
+                        ForEach(
+                            category.videos
+                                .filteredBy(searchText)
+                                .sorted(using: SortDescriptor(\.name, comparator: .localizedStandard))
+                        ) { video in
+                                VideoCell(video: video)
                         }
                     } header: {
-                        VStack(alignment: .leading) {
+                        HStack(alignment: .firstTextBaseline) {
                             Text(category.name)
                             Text("\(category.viewedCount) / \(category.toWatchCount)")
-                                .foregroundStyle(.secondary)
                                 .font(.caption)
                         }
                     }
@@ -38,6 +42,7 @@ struct RootView: View {
                     ShareLink(item: ViewingProgress(categories: categories), preview: SharePreview("Share progress"))
                 }
             }
+            .searchable(text: $searchText, prompt: "Search for a video")
         }
         .task {
             guard categories.isEmpty else { return }
@@ -45,6 +50,30 @@ struct RootView: View {
                 try modelContext.loadStoredCategories()
             } catch {
                 fatalError(error.localizedDescription)
+            }
+        }
+    }
+}
+
+extension Array where Element == Category {
+    func filteredBy(_ searchText: String) -> some RandomAccessCollection<Category> {
+        if searchText.isEmpty {
+            return self
+        } else {
+            return filter {
+                !$0.videos.filteredBy(searchText).isEmpty
+            }
+        }
+    }
+}
+
+extension Array where Element == Video {
+    func filteredBy(_ searchText: String) -> some RandomAccessCollection<Video> {
+        if searchText.isEmpty {
+            return self
+        } else {
+            return filter {
+                $0.name.localizedCaseInsensitiveContains(searchText)
             }
         }
     }
