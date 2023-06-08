@@ -12,24 +12,32 @@ struct RootView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Category.name) private var categories: [Category]
     @State private var searchText: String = ""
+    @State private var isFiltering: Bool = false
 
     var body: some View {
         NavigationStack {
             List {
-                ForEach(categories.filteredBy(searchText)) { category in
+                ForEach(categories.filter(\.isVisible).filteredBy(searchText)) { category in
                     CategorySection(category: category, searchText: searchText)
                 }
             }
             .listStyle(.plain)
             .navigationTitle("WWD See")
+            .searchable(text: $searchText, prompt: "Search for a video")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
-                    ShareLink(item: ViewingProgress(categories: categories), preview: SharePreview("Share progress"))
+                    Button {
+                        isFiltering = true
+                    } label: {
+                        Label("Filter", systemImage: "line.3.horizontal.decrease.circle")
+                            .popover(isPresented: $isFiltering) {
+                                FilterView()
+                            }
+                    }
                 }
             }
-            .searchable(text: $searchText, prompt: "Search for a video")
             .safeAreaInset(edge: .bottom) {
-                ProgressSummary()
+                ProgressSummary(categories: categories)
                     .padding()
                     .background(.ultraThinMaterial)
                     .clipShape(.capsule)
@@ -75,6 +83,7 @@ private struct CategorySection: View {
 
 // MARK: - Progress Summary
 struct ProgressSummary: View {
+    let categories: [Category]
     @Query private var videos: [Video]
 
     var body: some View {
@@ -83,7 +92,12 @@ struct ProgressSummary: View {
         let total = videos.count - ignored
         let progress = Float(watched) / Float(total)
         let progressFormat = FloatingPointFormatStyle<Float>.Percent().precision(.fractionLength(2))
-        return Text("\(watched) of \(total) \(progress, format: progressFormat), \(ignored) ignored")
+        return HStack(alignment: .firstTextBaseline) {
+            Text("\(watched) of \(total) \(progress, format: progressFormat), \(ignored) ignored")
+            ShareLink(item: ViewingProgress(categories: categories, videos: videos),
+                      preview: SharePreview("Share progress"))
+                .labelStyle(.iconOnly)
+        }
     }
 }
 

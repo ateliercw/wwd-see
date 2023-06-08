@@ -13,11 +13,18 @@ final class Category {
     var id: URL { url }
     @Attribute(.unique) let url: URL
     let name: String
+    var isFiltered: Bool = false
     @Relationship(inverse: \Video.categories) var videos: [Video]
 
-    init(url: URL, name: String, videos: [Video]? = nil) {
+    var isVisible: Bool {
+        get { !isFiltered }
+        set { isFiltered = !newValue }
+    }
+
+    init(url: URL, name: String, isFiltered: Bool = false, videos: [Video]? = nil) {
         self.url = url
         self.name = name
+        self.isFiltered = isFiltered
         self.videos = videos ?? []
     }
 }
