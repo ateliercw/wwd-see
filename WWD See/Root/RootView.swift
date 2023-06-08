@@ -16,23 +16,8 @@ struct RootView: View {
     var body: some View {
         NavigationStack {
             List {
-                ProgressSummary()
                 ForEach(categories.filteredBy(searchText)) { category in
-                    Section {
-                        ForEach(
-                            category.videos
-                                .filteredBy(searchText)
-                                .sorted(using: SortDescriptor(\.name, comparator: .localizedStandard))
-                        ) { video in
-                                VideoCell(video: video)
-                        }
-                    } header: {
-                        HStack(alignment: .firstTextBaseline) {
-                            Text(category.name)
-                            Text("\(category.viewedCount) / \(category.toWatchCount)")
-                                .font(.caption)
-                        }
-                    }
+                    CategorySection(category: category, searchText: searchText)
                 }
             }
             .listStyle(.plain)
@@ -43,6 +28,13 @@ struct RootView: View {
                 }
             }
             .searchable(text: $searchText, prompt: "Search for a video")
+            .safeAreaInset(edge: .bottom) {
+                ProgressSummary()
+                    .padding()
+                    .background(.ultraThinMaterial)
+                    .clipShape(.capsule)
+                    .shadow(radius: 4)
+            }
         }
         .task {
             guard categories.isEmpty else { return }
@@ -55,30 +47,33 @@ struct RootView: View {
     }
 }
 
-extension Array where Element == Category {
-    func filteredBy(_ searchText: String) -> some RandomAccessCollection<Category> {
-        if searchText.isEmpty {
-            return self
-        } else {
-            return filter {
-                !$0.videos.filteredBy(searchText).isEmpty
+// MARK: - Category Section
+private struct CategorySection: View {
+    let category: Category
+    let searchText: String
+
+    private var filteredVideos: some RandomAccessCollection<Video> {
+        category.videos
+            .filteredBy(searchText)
+            .sorted(using: SortDescriptor(\.name, comparator: .localizedStandard))
+    }
+
+    var body: some View {
+        Section {
+            ForEach(filteredVideos) { video in
+                VideoCell(video: video)
+            }
+        } header: {
+            HStack(alignment: .firstTextBaseline) {
+                Text(category.name)
+                Text("\(category.viewedCount) / \(category.toWatchCount)")
+                    .font(.caption)
             }
         }
     }
 }
 
-extension Array where Element == Video {
-    func filteredBy(_ searchText: String) -> some RandomAccessCollection<Video> {
-        if searchText.isEmpty {
-            return self
-        } else {
-            return filter {
-                $0.name.localizedCaseInsensitiveContains(searchText)
-            }
-        }
-    }
-}
-
+// MARK: - Progress Summary
 struct ProgressSummary: View {
     @Query private var videos: [Video]
 
@@ -92,6 +87,7 @@ struct ProgressSummary: View {
     }
 }
 
+// MARK: - Video Cel
 struct VideoCell: View {
     let video: Video
 
@@ -101,43 +97,83 @@ struct VideoCell: View {
         } label: {
             HStack {
                 symbol
+                    .foregroundColor(.accentColor)
                 Text(video.name)
             }
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-            Button {
-                video.watched.toggle()
-            } label: {
-                if video.watched {
-                    Label("Mark as unwatched", systemImage: "circle")
-                } else {
-                    Label("Mark as watched", systemImage: "checkmark")
-                }
-            }
-            .tint(.blue)
+            toggleWatchedButton
         }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
-            Button(role: video.excluded ? .destructive : .none) {
-                video.excluded.toggle()
-            } label: {
-                if video.excluded {
-                    Label("Include video", systemImage: "eye.slash")
-                } else {
-                    Label("Exclude video", systemImage: "eye")
-                }
-            }
-            .tint(video.excluded ? .green : .red)
+            toggleExcludeButton
         }
     }
 
-    var symbol: Image {
+    private var toggleWatchedButton: some View {
+        Button {
+            video.watched.toggle()
+        } label: {
+            if video.watched {
+                Label("Mark as unwatched", systemImage: "circle.dotted")
+            } else {
+                Label("Mark as watched", systemImage: "circle.fill")
+            }
+        }
+        .tint(.blue)
+    }
+
+    private var toggleExcludeButton: some View {
+        Button(role: video.excluded ? .destructive : .none) {
+            video.excluded.toggle()
+        } label: {
+            if video.excluded {
+                Label("Include video", systemImage: "eye")
+            } else {
+                Label("Exclude video", systemImage: "eye.slash")
+            }
+        }
+        .tint(video.excluded ? .green : .red)
+    }
+
+    private var symbol: Image {
         if video.excluded {
             Image(systemName: "xmark")
         } else if video.watched {
-            Image(systemName: "checkmark")
+            Image(systemName: "circle.fill")
         } else {
             Image(systemName: "circle")
         }
+    }
+}
+
+// MARK: - Filtering helpers
+extension Array where Element == Category {
+    func filteredBy(_ searchText: String) -> some RandomAccessCollection<Category> {
+        if searchText.isEmpty {
+            return self
+        } else {
+            return filter {
+                $0.videos.contains { $0.matches(searchText) }
+            }
+        }
+    }
+}
+
+extension Array where Element == Video {
+    func filteredBy(_ searchText: String) -> some RandomAccessCollection<Video> {
+        if searchText.isEmpty {
+            return self
+        } else {
+            return filter {
+                $0.matches(searchText)
+            }
+        }
+    }
+}
+
+extension Video {
+    func matches(_ search: String) -> Bool {
+        name.localizedCaseInsensitiveContains(search)
     }
 }
 

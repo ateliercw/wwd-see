@@ -8,38 +8,21 @@
 import SwiftUI
 
 struct VideoView: View {
-    let video: Video
+    @Bindable private(set) var video: Video
 
     var body: some View {
         List {
+            Toggle("Watched", isOn: $video.watched)
+            Toggle("Excluded", isOn: $video.excluded)
+        }
+        .safeAreaInset(edge: .top) {
             Text(video.name)
                 .font(.title)
-            Section {
-                Button {
-                    video.watched.toggle()
-                } label: {
-                    HStack {
-                        Text("Watched")
-                        if video.watched {
-                            Spacer()
-                            Image(systemName: "checkmark")
-                        }
-                    }
-                }
-            }
-            Section {
-                Button {
-                    video.excluded.toggle()
-                } label: {
-                    HStack {
-                        Text("Excluded")
-                        if video.excluded {
-                            Spacer()
-                            Image(systemName: "checkmark")
-                        }
-                    }
-                }
-            }
+                .padding()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(.ultraThinMaterial)
         }
+        .listStyle(.plain)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
