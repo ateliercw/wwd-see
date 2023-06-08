@@ -1,0 +1,78 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%lld / %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld / %2$lld"
+          }
+        }
+      }
+    },
+    "%lld of %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld"
+          }
+        }
+      }
+    },
+    "%lld of %lld %@, %lld ignored" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld %3$@, %4$lld ignored"
+          }
+        }
+      }
+    },
+    "Done" : {
+
+    },
+    "Exclude video" : {
+
+    },
+    "Excluded" : {
+
+    },
+    "Filter" : {
+
+    },
+    "Hide all" : {
+
+    },
+    "Include video" : {
+
+    },
+    "Mark as unwatched" : {
+
+    },
+    "Mark as watched" : {
+
+    },
+    "Search for a video" : {
+
+    },
+    "Share progress" : {
+
+    },
+    "Show all" : {
+
+    },
+    "Showing" : {
+
+    },
+    "Watched" : {
+
+    },
+    "WWD See" : {
+
+    }
+  },
+  "version" : "1.0"
+}
