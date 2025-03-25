@@ -7,22 +7,32 @@ let package = Package(
     name: "WWDC 2023",
     platforms: [.macOS(.v13), .iOS(.v16)],
     products: [
+        .library(name: "WWDCFetch", targets: [
+            "WWDCFetch",
+        ]),
         .library(name: "WWDCData", targets: [
             "WWDCData",
         ])
     ],
     dependencies: [
-        .package(url: "https://github.com/rnantes/swift-html-parser.git", branch: "master"),
-        .package(url: "https://github.com/apple/swift-argument-parser", from: "1.2.0"),
+        .package(url: "https://github.com/cezheng/Fuzi", from: "3.1.3"),
+        .package(url: "git@github.com:SimplyDanny/SwiftLintPlugins.git", from: "0.58.2")
     ]
     , targets: [
-        .executableTarget(
-            name: "GetWWDC",
+        .target(
+            name: "WWDCData",
+            plugins: [
+                .plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins"),
+            ]
+        ),
+        .target(
+            name: "WWDCFetch",
             dependencies: [
-                .byName(name: "WWDCData"),
-                .product(name: "SwiftHTMLParser", package: "swift-html-parser"),
-                .product(name: "ArgumentParser", package: "swift-argument-parser"),
-            ]),
-        .target(name: "WWDCData"),
+                .product(name: "Fuzi", package: "Fuzi"),
+            ],
+            plugins: [
+                .plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins"),
+            ]
+        ),
     ]
 )
