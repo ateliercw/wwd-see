@@ -1,0 +1,30 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Events" : {
+
+    },
+    "Fetch topics and events to get started" : {
+
+    },
+    "Get Started" : {
+
+    },
+    "Load" : {
+
+    },
+    "Needs to load" : {
+
+    },
+    "No topics or events available" : {
+
+    },
+    "Select a topic or event" : {
+
+    },
+    "Topics" : {
+
+    }
+  },
+  "version" : "1.0"
+}
