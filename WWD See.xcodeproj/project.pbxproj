@@ -7,38 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3D538E462A2F7FDC006BF064 /* WWDCData in Frameworks */ = {isa = PBXBuildFile; productRef = 3D538E452A2F7FDC006BF064 /* WWDCData */; };
+		47369AA32D92EF91007778E2 /* WWDCData in Frameworks */ = {isa = PBXBuildFile; productRef = 47369AA22D92EF91007778E2 /* WWDCData */; };
+		47369AA52D92EF91007778E2 /* WWDCFetch in Frameworks */ = {isa = PBXBuildFile; productRef = 47369AA42D92EF91007778E2 /* WWDCFetch */; };
+		47369AA72D92EF91007778E2 /* SharingGRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 47369AA62D92EF91007778E2 /* SharingGRDB */; };
+		47369B1F2D935119007778E2 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 47369B1E2D935113007778E2 /* .swiftlint.yml */; };
 		47546A4D2D91637A00B91C85 /* WWDCData in Frameworks */ = {isa = PBXBuildFile; productRef = 47546A4C2D91637A00B91C85 /* WWDCData */; };
 		47546A4F2D91637A00B91C85 /* WWDCFetch in Frameworks */ = {isa = PBXBuildFile; productRef = 47546A4E2D91637A00B91C85 /* WWDCFetch */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3D538E442A2F7EDA006BF064 /* WWDC - TLDW */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "WWDC - TLDW"; sourceTree = "<group>"; };
-		3DBD88FB2A2F563F003BEAAA /* WWD See.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WWD See.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		47369A912D92EF72007778E2 /* WWD See.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WWD See.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		47369B1E2D935113007778E2 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		47546A192D915F4000B91C85 /* WWDC Loader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WWDC Loader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		47546A482D915F5700B91C85 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Content/Info.plist,
-			);
-			target = 3DBD88FA2A2F563F003BEAAA /* WWD See */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		47369A922D92EF72007778E2 /* WWD See */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "WWD See"; sourceTree = "<group>"; };
 		47546A1A2D915F4000B91C85 /* WWDC Loader */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "WWDC Loader"; sourceTree = "<group>"; };
-		47546A3B2D915F5700B91C85 /* WWD See */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (47546A482D915F5700B91C85 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "WWD See"; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3DBD88F82A2F563F003BEAAA /* Frameworks */ = {
+		47369A8E2D92EF72007778E2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D538E462A2F7FDC006BF064 /* WWDCData in Frameworks */,
+				47369AA52D92EF91007778E2 /* WWDCFetch in Frameworks */,
+				47369AA72D92EF91007778E2 /* SharingGRDB in Frameworks */,
+				47369AA32D92EF91007778E2 /* WWDCData in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,9 +60,10 @@
 		3DBD88F22A2F563F003BEAAA = {
 			isa = PBXGroup;
 			children = (
+				47369B1E2D935113007778E2 /* .swiftlint.yml */,
 				3D538E442A2F7EDA006BF064 /* WWDC - TLDW */,
-				47546A3B2D915F5700B91C85 /* WWD See */,
 				47546A1A2D915F4000B91C85 /* WWDC Loader */,
+				47369A922D92EF72007778E2 /* WWD See */,
 				3DBD88FC2A2F563F003BEAAA /* Products */,
 				3D1556602A2F5FE400FA966E /* Frameworks */,
 			);
@@ -75,8 +72,8 @@
 		3DBD88FC2A2F563F003BEAAA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3DBD88FB2A2F563F003BEAAA /* WWD See.app */,
 				47546A192D915F4000B91C85 /* WWDC Loader.app */,
+				47369A912D92EF72007778E2 /* WWD See.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -84,27 +81,30 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3DBD88FA2A2F563F003BEAAA /* WWD See */ = {
+		47369A902D92EF72007778E2 /* WWD See */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3DBD890D2A2F5640003BEAAA /* Build configuration list for PBXNativeTarget "WWD See" */;
+			buildConfigurationList = 47369A9D2D92EF73007778E2 /* Build configuration list for PBXNativeTarget "WWD See" */;
 			buildPhases = (
-				3DBD88F72A2F563F003BEAAA /* Sources */,
-				3DBD88F82A2F563F003BEAAA /* Frameworks */,
-				3DBD88F92A2F563F003BEAAA /* Resources */,
+				47369A8D2D92EF72007778E2 /* Sources */,
+				47369A8E2D92EF72007778E2 /* Frameworks */,
+				47369A8F2D92EF72007778E2 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				47369AA12D92EF85007778E2 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				47546A3B2D915F5700B91C85 /* WWD See */,
+				47369A922D92EF72007778E2 /* WWD See */,
 			);
 			name = "WWD See";
 			packageProductDependencies = (
-				3D538E452A2F7FDC006BF064 /* WWDCData */,
+				47369AA22D92EF91007778E2 /* WWDCData */,
+				47369AA42D92EF91007778E2 /* WWDCFetch */,
+				47369AA62D92EF91007778E2 /* SharingGRDB */,
 			);
 			productName = "WWD See";
-			productReference = 3DBD88FB2A2F563F003BEAAA /* WWD See.app */;
+			productReference = 47369A912D92EF72007778E2 /* WWD See.app */;
 			productType = "com.apple.product-type.application";
 		};
 		47546A182D915F4000B91C85 /* WWDC Loader */ = {
@@ -118,6 +118,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				47369A8C2D92EEB3007778E2 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				47546A1A2D915F4000B91C85 /* WWDC Loader */,
@@ -139,10 +140,10 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
-					3DBD88FA2A2F563F003BEAAA = {
-						CreatedOnToolsVersion = 15.0;
+					47369A902D92EF72007778E2 = {
+						CreatedOnToolsVersion = 16.2;
 					};
 					47546A182D915F4000B91C85 = {
 						CreatedOnToolsVersion = 16.2;
@@ -160,22 +161,24 @@
 			mainGroup = 3DBD88F22A2F563F003BEAAA;
 			packageReferences = (
 				475469DD2D915B8A00B91C85 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
+				473682212D92D447007778E2 /* XCRemoteSwiftPackageReference "sharing-grdb" */,
 			);
 			productRefGroup = 3DBD88FC2A2F563F003BEAAA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3DBD88FA2A2F563F003BEAAA /* WWD See */,
 				47546A182D915F4000B91C85 /* WWDC Loader */,
+				47369A902D92EF72007778E2 /* WWD See */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3DBD88F92A2F563F003BEAAA /* Resources */ = {
+		47369A8F2D92EF72007778E2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47369B1F2D935119007778E2 /* .swiftlint.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,7 +192,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3DBD88F72A2F563F003BEAAA /* Sources */ = {
+		47369A8D2D92EF72007778E2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -204,6 +207,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		47369A8C2D92EEB3007778E2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 47369A8B2D92EEB3007778E2 /* SwiftLintBuildToolPlugin */;
+		};
+		47369AA12D92EF85007778E2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 47369AA02D92EF85007778E2 /* SwiftLintBuildToolPlugin */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		3DBD890B2A2F5640003BEAAA /* Debug */ = {
@@ -240,6 +254,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -302,6 +317,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -322,78 +338,66 @@
 			};
 			name = Release;
 		};
-		3DBD890E2A2F5640003BEAAA /* Debug */ = {
+		47369A9E2D92EF73007778E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "WWD See/Content/WWD_See.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "WWD See/Content/WWDSee.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"WWD See/Preview Content\"";
 				DEVELOPMENT_TEAM = 8NQ6VJNLCQ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "WWD See/Content/Info.plist";
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 13.4;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.atelierclockwork.WWD-See";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
+				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		3DBD890F2A2F5640003BEAAA /* Release */ = {
+		47369A9F2D92EF73007778E2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "WWD See/Content/WWD_See.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "WWD See/Content/WWDSee.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"WWD See/Preview Content\"";
 				DEVELOPMENT_TEAM = 8NQ6VJNLCQ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "WWD See/Content/Info.plist";
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 13.4;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.atelierclockwork.WWD-See";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
+				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -409,6 +413,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"WWDC Loader/Preview Content\"";
 				DEVELOPMENT_TEAM = 8NQ6VJNLCQ;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -438,6 +443,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"WWDC Loader/Preview Content\"";
 				DEVELOPMENT_TEAM = 8NQ6VJNLCQ;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -470,11 +476,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3DBD890D2A2F5640003BEAAA /* Build configuration list for PBXNativeTarget "WWD See" */ = {
+		47369A9D2D92EF73007778E2 /* Build configuration list for PBXNativeTarget "WWD See" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3DBD890E2A2F5640003BEAAA /* Debug */,
-				3DBD890F2A2F5640003BEAAA /* Release */,
+				47369A9E2D92EF73007778E2 /* Debug */,
+				47369A9F2D92EF73007778E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -491,6 +497,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		473682212D92D447007778E2 /* XCRemoteSwiftPackageReference "sharing-grdb" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:pointfreeco/sharing-grdb.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.1;
+			};
+		};
 		475469DD2D915B8A00B91C85 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:SimplyDanny/SwiftLintPlugins.git";
@@ -502,9 +516,28 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3D538E452A2F7FDC006BF064 /* WWDCData */ = {
+		47369A8B2D92EEB3007778E2 /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 475469DD2D915B8A00B91C85 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
+		47369AA02D92EF85007778E2 /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 475469DD2D915B8A00B91C85 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
+		47369AA22D92EF91007778E2 /* WWDCData */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = WWDCData;
+		};
+		47369AA42D92EF91007778E2 /* WWDCFetch */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WWDCFetch;
+		};
+		47369AA62D92EF91007778E2 /* SharingGRDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 473682212D92D447007778E2 /* XCRemoteSwiftPackageReference "sharing-grdb" */;
+			productName = SharingGRDB;
 		};
 		47546A4C2D91637A00B91C85 /* WWDCData */ = {
 			isa = XCSwiftPackageProductDependency;

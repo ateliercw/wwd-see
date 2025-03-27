@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WWDCFetch
+import WWDCData
 
 @MainActor
 @Observable
@@ -65,6 +66,14 @@ class ContentViewModel {
             isLoading = false
         }
     }
+
+    func export(event: WWDCEvent) -> EventContainer {
+        EventContainer(
+            event: event,
+            topics: topics,
+            videos: event.fragments.compactMap({ loadedVideos[$0.url] })
+        )
+    }
 }
 
 private extension Collection where Element == WWDCVideo {
@@ -96,14 +105,28 @@ private actor ContentWorker {
         loadedVideos[url] = video
     }
 
-    private func addAssociationsTo( _ video: inout WWDCVideo, events: [WWDCEvent], topics: [WWDCTopic]) {
-        if let event = events.first(where: { $0.fragments.map(\.url.absoluteString).contains(video.url.absoluteString) }) {
+    private func addAssociationsTo(
+        _ video: inout WWDCVideo,
+        events: [WWDCEvent],
+        topics: [WWDCTopic]
+    ) {
+        if let event = events.first(where: { $0.fragments.map(\.url.absoluteString).contains(video.url.absoluteString)
+        }) {
             video.event = event
         }
-        video.topics = topics.filter { $0.fragments.map(\.url.absoluteString).contains(video.url.absoluteString) }
+        video.topics = topics.filter {
+            $0.fragments.map(\.url.absoluteString).contains(video.url.absoluteString)
+        }
+        if video.topics.isEmpty {
+            print("empty topics \(video.title)")
+        }
     }
 
-    func loadVideosFor(fragments: [WWDCVideoFragment], events: [WWDCEvent], topics: [WWDCTopic]) async throws -> [WWDCVideo] {
+    func loadVideosFor(
+        fragments: [WWDCVideoFragment],
+        events: [WWDCEvent],
+        topics: [WWDCTopic]
+    ) async throws -> [WWDCVideo] {
         try await withThrowingTaskGroup(of: WWDCVideo.self) { [weak self] group in
             guard let self else { return [] }
             var results = [WWDCVideo]()

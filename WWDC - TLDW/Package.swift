@@ -16,11 +16,15 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/cezheng/Fuzi", from: "3.1.3"),
-        .package(url: "git@github.com:SimplyDanny/SwiftLintPlugins.git", from: "0.58.2")
+        .package(url: "git@github.com:SimplyDanny/SwiftLintPlugins.git", from: "0.58.2"),
+        .package(url: "git@github.com:pointfreeco/sharing-grdb.git", from: "0.1.1"),
     ]
     , targets: [
         .target(
             name: "WWDCData",
+            dependencies: [
+                .product(name: "SharingGRDB", package: "sharing-grdb"),
+            ],
             plugins: [
                 .plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins"),
             ]
@@ -29,6 +33,7 @@ let package = Package(
             name: "WWDCFetch",
             dependencies: [
                 .product(name: "Fuzi", package: "Fuzi"),
+                .target(name: "WWDCData")
             ],
             plugins: [
                 .plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins"),

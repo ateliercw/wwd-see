@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "wwdc23.json",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

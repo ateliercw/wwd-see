@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WWDCFetch
+import WWDCData
 
 struct ContentView: View {
     enum Selection: Hashable, Identifiable {
@@ -17,6 +18,8 @@ struct ContentView: View {
     }
     @State private var viewModel = ContentViewModel()
     @State private var selection: Selection?
+    @State private var exporting = false
+    @State private var document: EventContainer?
 
     var body: some View {
         NavigationSplitView {
@@ -43,6 +46,15 @@ struct ContentView: View {
             selectionView
         }
         .navigationSplitViewStyle(.prominentDetail)
+        .fileExporter(
+            isPresented: $exporting,
+            document: document,
+            contentType: .json,
+            defaultFilename: (document?.event.name.lowercased().replacingOccurrences(of: " ", with: "_"))
+                .map({ "\($0).json" })
+        ) { _ in
+            document = nil
+        }
     }
 }
 
@@ -56,6 +68,9 @@ private extension ContentView {
                 isLoading: viewModel.isLoading
             ) {
                 viewModel.loadVideosFor(event)
+            } export: {
+                document = viewModel.export(event: event)
+                exporting = true
             }
         case let .topic(topic):
             TopicView(
@@ -118,6 +133,7 @@ struct EventView: View {
     let loadedVideos: [URL: WWDCVideo]
     let isLoading: Bool
     let load: () -> Void
+    let export: () -> Void
 
     var body: some View {
         SectionedVideoList(
@@ -127,6 +143,15 @@ struct EventView: View {
             load: load
         )
         .navigationTitle(event.name)
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                if !event.fragments.contains(where: { loadedVideos[$0.url] == nil }) {
+                    Button(action: export) {
+                        Label("Export", systemImage: "arrow.up")
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -145,7 +170,10 @@ struct SectionedVideoList: View {
     private var dateSections: [(Date, [WWDCVideo])] {
         let loaded = fragments.compactMap { loadedVideos[$0.url] }
         return [Date: [WWDCVideo]](grouping: loaded, by: \.datePublished).mapValues { videos in
-            videos.sorted(using: [KeyPathComparator(\.numericSortComponent), KeyPathComparator(\.url.lastPathComponent, comparator: .localizedStandard)])
+            videos.sorted(using: [
+                KeyPathComparator(\.numericSortComponent),
+                KeyPathComparator(\.url.lastPathComponent, comparator: .localizedStandard)
+            ])
         }
         .sorted(using: KeyPathComparator(\.key))
     }
@@ -163,7 +191,7 @@ struct SectionedVideoList: View {
             }
             let dateSections = dateSections
             if !dateSections.isEmpty {
-                ForEach(dateSections, id:\.0) { idx in
+                ForEach(dateSections, id: \.0) { idx in
                     let (key, value) = idx
                     Section(key.formatted(.dateTime.year().month().day())) {
                         ForEach(value) { video in
@@ -189,8 +217,6 @@ struct SectionedVideoList: View {
         }
     }
 }
-
-
 
 private struct VideoView: View {
     let video: WWDCVideo
