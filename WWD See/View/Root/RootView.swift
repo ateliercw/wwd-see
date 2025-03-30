@@ -19,18 +19,20 @@ struct RootView: View {
                     event: event,
                     selection: $coordinator.selectedTopic
                 )
+                .navigationTitle("WWD See")
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        EventPicker(events: coordinator.events, selection: $coordinator.selectedEvent)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .background(.thinMaterial, ignoresSafeAreaEdges: .top)
+                    }
+                }
             }
         } detail: {
             if let event = coordinator.selectedEvent {
                 VideosView(event: event, topic: coordinator.selectedTopic)
-            }
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigation) {
-                EventPicker(
-                    events: coordinator.events,
-                    selection: $coordinator.selectedEvent
-                )
+                    .navigationTitle(coordinator.selectedTopic?.name ?? "All Videos")
+                    .toolbarRole(.editor)
             }
         }
         .task {

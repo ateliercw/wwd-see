@@ -30,6 +30,7 @@ struct TopicPicker: View {
                 }
             }
         }
+        .listStyle(.sidebar)
         .task(id: event) {
             await updateQuery()
             if selection == nil {
@@ -62,16 +63,6 @@ private extension TopicPicker {
                     eventViewedAlias[Column("ignored")] == false
                 )
 
-            let topicViewedAlias = TableAlias()
-
-            let baseTopicVideos = TopicRecord.videos
-                .joining(optional: VideoRecord.viewed.aliased(topicViewedAlias))
-                .filter(Column("eventUrl") == event.url)
-                .filter(
-                    topicViewedAlias[Column("ignored")] == nil ||
-                    topicViewedAlias[Column("ignored")] == false
-                )
-
             let topics = try event
                 .topics
                 .fetchAll(db)
@@ -82,17 +73,17 @@ private extension TopicPicker {
 
                 let baseRows = topic.videos
                     .filter(Column("eventUrl") == event.url)
-                    .joining(optional: VideoRecord.viewed)
+                    .joining(optional: VideoRecord.viewed.aliased(viewedAlias))
                     .filter(
-                        topicViewedAlias[Column("ignored")] == nil ||
-                        topicViewedAlias[Column("ignored")] == false
+                        viewedAlias[Column("ignored")] == nil ||
+                        viewedAlias[Column("ignored")] == false
                     )
 
                 let total = try baseRows
                     .fetchCount(db)
 
                 let watched = try baseRows
-                    .filter(topicViewedAlias[Column("watchedDAte") != nil])
+                    .filter(viewedAlias[Column("watchedDAte") != nil])
                     .fetchCount(db)
                 return TopicDisplayRow(topic: topic, watched: watched, total: total)
             }
