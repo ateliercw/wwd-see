@@ -7,19 +7,20 @@ let package = Package(
     name: "WWDC 2023",
     platforms: [.macOS(.v13), .iOS(.v16)],
     products: [
-        .library(name: "WWDCFetch", targets: [
-            "WWDCFetch",
-        ]),
-        .library(name: "WWDCData", targets: [
-            "WWDCData",
-        ])
+        .library(name: "WWDCFetch", targets: ["WWDCFetch"]),
+        .library(name: "WWDCData", targets: ["WWDCData"]),
+        .executable(name: "GetWWDC", targets: ["GetWWDC"]),
     ],
     dependencies: [
         .package(url: "https://github.com/cezheng/Fuzi", from: "3.1.3"),
         .package(url: "git@github.com:SimplyDanny/SwiftLintPlugins.git", from: "0.58.2"),
         .package(url: "git@github.com:pointfreeco/sharing-grdb.git", from: "0.1.1"),
-    ]
-    , targets: [
+        .package(
+            url: "https://github.com/apple/swift-argument-parser.git",
+            .upToNextMajor(from: "1.5.0")
+        ),
+    ],
+    targets: [
         .target(
             name: "WWDCData",
             dependencies: [
@@ -34,6 +35,17 @@ let package = Package(
             dependencies: [
                 .product(name: "Fuzi", package: "Fuzi"),
                 .target(name: "WWDCData")
+            ],
+            plugins: [
+                .plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins"),
+            ]
+        ),
+        .executableTarget(
+            name: "GetWWDC",
+            dependencies: [
+                .target(name: "WWDCData"),
+                .target(name: "WWDCFetch"),
+                .product(name: "ArgumentParser", package: "swift-argument-parser")
             ],
             plugins: [
                 .plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins"),

@@ -1,0 +1,8 @@
+### Swift_package_manager ###
+# swift_package_manager package manager specific files
+
+.build/
+Packages/
+Package.resolved
+.swiftpm/
+.build-cache/
