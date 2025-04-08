@@ -11,6 +11,7 @@ import IssueReporting
 import WWDCData
 
 @Observable
+@MainActor
 class RootCoordinator {
     @ObservationIgnored
     @Dependency(\.defaultDatabase) var database

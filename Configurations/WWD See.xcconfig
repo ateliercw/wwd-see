@@ -1,0 +1,40 @@
+//
+//  WWD See.xcconfig
+//  WWD See
+//
+//  Created by Michael Skiba on 08/04/2025.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+// Architectures
+
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator macosx
+
+// Deployment
+
+DEVELOPMENT_ASSET_PATHS = "WWD See/Preview Content"
+
+// Info.plist Values
+INFOPLIST_KEY_UILaunchScreen_Generation = YES
+INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait
+INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown
+
+// Packaging
+PRODUCT_BUNDLE_IDENTIFIER = com.atelierclockwork.WWD-See
+PRODUCT_NAME[config=Debug] = $(TARGET_NAME)
+
+// Signing
+
+CODE_SIGN_ENTITLEMENTS = WWD See/Content/WWDSee.entitlements
+
+// Versioning
+
+CURRENT_PROJECT_VERSION = 1
+MARKETING_VERSION = 1.0
+
+// User-Defined
+
+SUPPORTS_MACCATALYST = NO
+TARGETED_DEVICE_FAMILY = 1,2

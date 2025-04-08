@@ -1,0 +1,27 @@
+//
+//  Release.xcconfig
+//  WWD See
+//
+//  Created by Michael Skiba on 08/04/2025.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include "Base.xcconfig"
+
+// Build Options
+
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+
+// Apple Clang - Preprocessing
+
+ENABLE_NS_ASSERTIONS = NO
+
+// Swift Compiler - Code Generation
+
+SWIFT_COMPILATION_MODE = wholemodule
+
+// User-Defined
+
+MTL_ENABLE_DEBUG_INFO = NO
