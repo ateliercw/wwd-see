@@ -49,14 +49,25 @@ private struct EventTopics: FetchKeyRequest {
 
 extension RootCoordinator {
     func loadData() async throws {
-        for data in DataAsset.Event.all {
-            let decoder = JSONDecoder()
-            let eventContainer = try decoder.decode(EventContainer.self, from: data)
-            try await database.write { db in
-                try eventContainer.event.save(db)
-                try eventContainer.topics.forEach { try $0.save(db) }
-                try eventContainer.videos.forEach { try $0.save(db) }
-                try eventContainer.videoTopics.forEach { try $0.save(db) }
+        let urls = try await WWDCApiService.fetchEventURLs()
+        let containers = try await withThrowingTaskGroup(of: EventContainer.self) { group in
+            for url in urls {
+                group.addTask {
+                    try await WWDCApiService.loadEvent(url)
+                }
+            }
+            var containers = [EventContainer]()
+            while let container = try await group.next() {
+                containers.append(container)
+            }
+            return containers
+        }
+        try await database.write { db in
+            for container in containers {
+                try container.event.save(db)
+                try container.topics.forEach { try $0.save(db) }
+                try container.videos.forEach { try $0.save(db) }
+                try container.videoTopics.forEach { try $0.save(db) }
             }
         }
     }

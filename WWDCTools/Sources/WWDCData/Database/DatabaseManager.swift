@@ -8,13 +8,14 @@
 import Foundation
 import GRDB
 import IssueReporting
+import UIKit.NSDataAsset
 
 public enum DatabaseManager {
-    public static func prepareDatabase(inMemory: Bool = false) throws -> DatabaseWriter {
+    public static func prepareDatabase(fallback: NSDataAsset?, inMemory: Bool = false) throws -> DatabaseWriter {
         let databaseWriter: DatabaseWriter = if inMemory {
             try DatabaseQueue(named: UUID().uuidString, configuration: Configuration())
         } else {
-            try loadOrCreateDatabase()
+            try loadOrCreateDatabase(fallback: fallback)
         }
         do {
             try performMigrations(databaseWriter)
@@ -26,7 +27,7 @@ public enum DatabaseManager {
 }
 
 private extension DatabaseManager {
-    static func loadOrCreateDatabase() throws -> DatabaseWriter {
+    static func loadOrCreateDatabase(fallback: NSDataAsset?) throws -> DatabaseWriter {
         let fileManager = FileManager.default
         let appSupportURL = try fileManager.url(
             for: .applicationSupportDirectory, in: .userDomainMask,
@@ -35,7 +36,10 @@ private extension DatabaseManager {
         try fileManager.createDirectory(at: directoryURL, withIntermediateDirectories: true)
 
         let databaseURL = directoryURL.appendingPathComponent("db.sqlite")
-        debugPrint(databaseURL)
+        debugPrint(databaseURL.path(percentEncoded: false))
+        if !FileManager.default.fileExists(atPath: databaseURL.path(percentEncoded: false)), let data = fallback?.data {
+            try data.write(to: databaseURL)
+        }
         return try DatabaseQueue(path: databaseURL.path)
     }
 

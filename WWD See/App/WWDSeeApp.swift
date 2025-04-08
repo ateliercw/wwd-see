@@ -16,7 +16,10 @@ struct WWDSeeApp: App {
     init() {
         prepareDependencies {
             do {
-                $0.defaultDatabase = try DatabaseManager.prepareDatabase(inMemory: false)
+                $0.defaultDatabase = try DatabaseManager.prepareDatabase(
+                    fallback: NSDataAsset(name: "Data/db", bundle: .main),
+                    inMemory: false
+                )
             } catch {
                 reportIssue(error)
                 fatalError("Failed to create the default database")
