@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "WWDCTools",
-    platforms: [.macOS(.v13), .iOS(.v16)],
+    platforms: [.macOS(.v15), .iOS(.v18)],
     products: [
         .library(name: "WWDCFetch", targets: ["WWDCFetch"]),
         .library(name: "WWDCData", targets: ["WWDCData"]),

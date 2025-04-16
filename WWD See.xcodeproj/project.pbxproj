@@ -243,6 +243,11 @@
 			baseConfigurationReferenceAnchor = 4714E5642DA51DA900296A66 /* Configurations */;
 			baseConfigurationReferenceRelativePath = "WWD See.xcconfig";
 			buildSettings = {
+				INFOPLIST_FILE = "WWD-See-Info.plist";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "\"©️ 2025 Michael Skiba\"";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 			};
 			name = Debug;
 		};
@@ -251,6 +256,11 @@
 			baseConfigurationReferenceAnchor = 4714E5642DA51DA900296A66 /* Configurations */;
 			baseConfigurationReferenceRelativePath = "WWD See.xcconfig";
 			buildSettings = {
+				INFOPLIST_FILE = "WWD-See-Info.plist";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "\"©️ 2025 Michael Skiba\"";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 			};
 			name = Release;
 		};

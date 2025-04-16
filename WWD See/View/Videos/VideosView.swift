@@ -30,14 +30,17 @@ struct VideosView: View {
         }
         .task(id: [event, topic] as [AnyHashable]) {
             do {
-                try await $dates.load(.fetch(Videos(event: event, topic: topic)))
+                try await $dates.load(.fetch(VideosRequest(event: event, topic: topic)))
             } catch {
                 reportIssue(error)
             }
         }
+        .navigationTitle(topic?.name ?? event.name)
     }
+}
 
-    private struct Videos: FetchKeyRequest {
+private extension VideosView {
+    struct VideosRequest: FetchKeyRequest {
         let event: EventRecord
         let topic: TopicRecord?
 
@@ -52,7 +55,7 @@ struct VideosView: View {
         }
     }
 
-    private struct FullVideo: FetchableRecord, Decodable, Identifiable, Hashable {
+    struct FullVideo: FetchableRecord, Decodable, Identifiable, Hashable {
         var id: VideoRecord.ID { video.id }
         var video: VideoRecord
         var videoViewed: VideoViewedRecord?

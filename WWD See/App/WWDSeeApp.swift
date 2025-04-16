@@ -20,6 +20,7 @@ struct WWDSeeApp: App {
                     fallback: NSDataAsset(name: "Data/db", bundle: .main),
                     inMemory: false
                 )
+                $0.videoSyncService = ICloudVideoSyncService()
             } catch {
                 reportIssue(error)
                 fatalError("Failed to create the default database")

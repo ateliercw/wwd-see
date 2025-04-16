@@ -8,7 +8,11 @@
 import Foundation
 import GRDB
 import IssueReporting
+#if os(macOS)
+import AppKit.NSDataAsset
+#else
 import UIKit.NSDataAsset
+#endif
 
 public enum DatabaseManager {
     public static func prepareDatabase(fallback: NSDataAsset?, inMemory: Bool = false) throws -> DatabaseWriter {

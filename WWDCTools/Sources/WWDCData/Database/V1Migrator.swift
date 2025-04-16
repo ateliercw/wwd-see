@@ -76,7 +76,10 @@ private extension V1Migrator {
              table.column("ignored", .boolean)
                  .defaults(to: false)
                  .notNull()
-             table.column("watchedDate")
+             table.column("ignoredUpdated", .datetime)
+             table.column("watchedDate", .datetime)
+             table.column("watchedUpdated", .datetime)
+             table.column("syncRecord", .blob)
              table.belongsTo(
                 "video",
                 onDelete: .cascade

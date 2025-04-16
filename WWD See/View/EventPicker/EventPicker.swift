@@ -13,15 +13,13 @@ struct EventPicker: View {
     @Binding var selection: EventRecord?
 
     var body: some View {
-        Unwrapping($selection) { event in
-            Picker(selection: event) {
-                ForEach(events) { event in
-                    Text(event.name)
-                        .tag(event)
-                }
-            } label: {
-                EmptyView()
+        Picker(selection: $selection) {
+            ForEach(events) { event in
+                Text(event.name)
+                    .tag(Optional(event))
             }
+        } label: {
+            EmptyView()
         }
     }
 }

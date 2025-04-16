@@ -14,8 +14,8 @@ public struct VideoTopicRecord: FetchableRecord, PersistableRecord, TableRecord,
 
     public var id: [URL] { [videoUrl, topicUrl]  }
 
-    public var videoUrl: URL
-    public var topicUrl: URL
+    public private(set) var videoUrl: URL
+    public private(set) var topicUrl: URL
 
     static let video = belongsTo(VideoRecord.self, using: ForeignKey(["videoUrl"], to: ["url"]))
     static let topic = belongsTo(TopicRecord.self, using: ForeignKey(["topicUrl"], to: ["url"]))

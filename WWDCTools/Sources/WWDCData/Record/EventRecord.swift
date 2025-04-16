@@ -14,8 +14,8 @@ public struct EventRecord: FetchableRecord, PersistableRecord, TableRecord, Iden
         url.absoluteString
     }
 
-    public var name: String
-    public var url: URL
+    public private(set) var name: String
+    public private(set) var url: URL
 
     public init(name: String, url: URL) {
         self.name = name

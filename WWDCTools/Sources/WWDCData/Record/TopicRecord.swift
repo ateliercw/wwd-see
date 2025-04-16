@@ -13,9 +13,9 @@ public struct TopicRecord: FetchableRecord, PersistableRecord, TableRecord, Iden
 
     public var id: String { url.absoluteString }
 
-    public var name: String
-    public var url: URL
-    public var icon: String
+    public private(set) var name: String
+    public private(set) var url: URL
+    public private(set) var icon: String
 
     public init(name: String, url: URL, icon: String) {
         self.name = name

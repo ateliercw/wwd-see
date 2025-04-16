@@ -5,34 +5,30 @@
 //  Created by Michael Skiba on 27/03/2025.
 //
 
-#if !os(macOS)
 import SwiftUI
 import WWDCData
 import IssueReporting
 
 struct RootView: View {
     @State private var coordinator = RootCoordinator()
+    @State private var preferredCompactColumn = NavigationSplitViewColumn.sidebar
+
     var body: some View {
-        NavigationSplitView {
-            if let event = coordinator.selectedEvent {
-                TopicPicker(
-                    event: event,
-                    selection: $coordinator.selectedTopic
-                )
-                .navigationTitle("WWD See")
+        NavigationSplitView(preferredCompactColumn: $preferredCompactColumn) {
+            topicsList
                 .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
+                    ToolbarItem(placement: .navigation) {
                         EventPicker(events: coordinator.events, selection: $coordinator.selectedEvent)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .background(.thinMaterial, ignoresSafeAreaEdges: .top)
                     }
                 }
-            }
+                .navigationTitle("WWD See")
         } detail: {
-            if let event = coordinator.selectedEvent {
-                VideosView(event: event, topic: coordinator.selectedTopic)
-                    .navigationTitle(coordinator.selectedTopic?.name ?? "All Videos")
-                    .toolbarRole(.editor)
+            NavigationStack {
+                if let event = coordinator.selectedEvent {
+                    VideosView(event: event, topic: coordinator.selectedTopic)
+                } else {
+                    ContentUnavailableView("Select a topic to view videos.", systemImage: "play.display")
+                }
             }
         }
         .task {
@@ -43,8 +39,16 @@ struct RootView: View {
             }
         }
     }
+
+    @ViewBuilder
+    private var topicsList: some View {
+        if let event = coordinator.selectedEvent {
+            TopicList(event: event, selectedTopic: $coordinator.selectedTopic)
+        } else {
+            ContentUnavailableView("Select an event to get started", systemImage: "play.display")
+        }
+    }
 }
 #Preview {
     RootView()
 }
-#endif

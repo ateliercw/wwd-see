@@ -17,6 +17,7 @@ class RootCoordinator {
     @Dependency(\.defaultDatabase) var database
     @ObservationIgnored
     @SharedReader(.fetch(Events())) var events
+    private var needsLoading = true
 
     private var underlyingEventSelection: EventRecord?
     var selectedEvent: EventRecord? {
@@ -49,6 +50,8 @@ private struct EventTopics: FetchKeyRequest {
 
 extension RootCoordinator {
     func loadData() async throws {
+        guard needsLoading else { return }
+        needsLoading = false
         let urls = try await WWDCApiService.fetchEventURLs()
         let containers = try await withThrowingTaskGroup(of: EventContainer.self) { group in
             for url in urls {

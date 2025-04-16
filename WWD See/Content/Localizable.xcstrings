@@ -5,7 +5,7 @@
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "%1$@/%2$@"
           }
         }
@@ -14,10 +14,16 @@
     "Hide" : {
 
     },
-    "March watched" : {
+    "Mark as unwatched" : {
 
     },
-    "Mark unwatched" : {
+    "Mark as watched" : {
+
+    },
+    "Select a topic to view videos." : {
+
+    },
+    "Select an event to get started" : {
 
     },
     "Show" : {

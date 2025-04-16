@@ -2,7 +2,8 @@
   "data" : [
     {
       "filename" : "db.sqlite",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "universal-type-identifier" : "dyn.ah62d4rv4ge81g6pqrf4gn"
     }
   ],
   "info" : {

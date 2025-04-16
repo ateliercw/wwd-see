@@ -13,14 +13,14 @@ public struct VideoRecord: FetchableRecord, PersistableRecord, TableRecord, Iden
 
     public var id: String { url.absoluteString }
 
-    public var title: String
-    public var url: URL
-    public var sortValue: Int
-    public var datePublished: Date
-    public var platforms: [String]
-    public var duration: TimeInterval
-    public var summary: String
-    public var eventUrl: URL
+    public private(set) var title: String
+    public private(set) var url: URL
+    public private(set) var sortValue: Int
+    public private(set) var datePublished: Date
+    public private(set) var platforms: [String]
+    public private(set) var duration: TimeInterval
+    public private(set) var summary: String
+    public private(set) var eventUrl: URL
 
     public static let event = belongsTo(EventRecord.self, using: ForeignKey(["eventUrl"], to: ["url"]))
     public var event: QueryInterfaceRequest<EventRecord> {

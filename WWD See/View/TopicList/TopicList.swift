@@ -1,5 +1,5 @@
 //
-//  TopicPicker.swift
+//  TopicList.swift
 //  WWD See
 //
 //  Created by Michael Skiba on 26/03/2025.
@@ -10,37 +10,29 @@ import WWDCData
 import SharingGRDB
 import IssueReporting
 
-struct TopicPicker: View {
+struct TopicList: View {
     let event: EventRecord
-    @Binding var selection: TopicRecord?
+    @Binding var selectedTopic: TopicRecord?
     @State.SharedReader(value: []) private var topics: Topics.Value
 
     var body: some View {
-        let rebinding = Binding<TopicRecord??> {
-            Optional(selection)
-        } set: {
-            selection = $0 ?? nil
-        }
-        List(selection: rebinding) {
-            ForEach(topics, id: \.id) { result in
-                HStack {
-                    Text(result.topic?.name ?? "All Videos")
-                    Spacer()
-                    Text("\(result.watched, format: .number)/\(result.total, format: .number)")
-                }
+        List(topics, selection: $selectedTopic.topicSelection) { row in
+            HStack {
+                Text(row.topic?.name ?? "All Videos")
+                Spacer()
+                Text("\(row.watched, format: .number)/\(row.total, format: .number)")
             }
+            .tag(row.topic.topicTag)
         }
         .listStyle(.sidebar)
         .task(id: event) {
             await updateQuery()
-            if selection == nil {
-                selection = topics.first?.topic
-            }
         }
     }
 }
 
-private extension TopicPicker {
+// MARK: - Query fetching
+private extension TopicList {
     func updateQuery() async {
         do {
             try await $topics.load(.fetch(Topics(event: event)))
@@ -105,8 +97,63 @@ private extension TopicPicker {
     }
 }
 
-private extension TopicPicker.TopicDisplayRow {
-    init(topic: TopicRecord, row: TopicPicker.TopicRow) {
+// MARK: - Multiplatform Selection Hackery
+#if os(macOS)
+private enum TopicSelection: Hashable, Identifiable {
+    var id: Self { self }
+
+    case none
+    case some(TopicRecord)
+}
+
+private extension Optional where Wrapped == TopicRecord {
+    var topicSelection: TopicSelection {
+        get {
+            switch self {
+            case .none: .none
+            case let .some(value): .some(value)
+            }
+        }
+        set {
+            switch newValue {
+            case .none: self = .none
+            case let .some(value): self = value
+            }
+        }
+    }
+}
+#else
+typealias TopicSelection = TopicRecord??
+
+private extension Optional where Wrapped == TopicRecord {
+    var topicSelection: TopicRecord?? {
+        get {
+            switch self {
+            case .none: nil
+            case let value?: .some(value)
+            }
+        }
+        set {
+            switch newValue {
+            case nil, .some(.none): self = nil
+            case let .some(value)?: self = value
+            }
+        }
+    }
+}
+#endif
+
+private extension Optional where Wrapped == TopicRecord {
+    var topicTag: TopicSelection {
+        switch self {
+        case .none: .none
+        case let value?: .some(value)
+        }
+    }
+}
+
+private extension TopicList.TopicDisplayRow {
+    init(topic: TopicRecord, row: TopicList.TopicRow) {
         self.topic = topic
         self.watched = row.watched
         self.total = row.total
