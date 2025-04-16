@@ -25,7 +25,7 @@ struct RootView: View {
         } detail: {
             NavigationStack {
                 if let event = coordinator.selectedEvent {
-                    VideosView(event: event, topic: coordinator.selectedTopic)
+                    VideosView(event: event, topic: coordinator.selectedTopic.topic)
                 } else {
                     ContentUnavailableView("Select a topic to view videos.", systemImage: "play.display")
                 }

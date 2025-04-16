@@ -12,17 +12,17 @@ import IssueReporting
 
 struct TopicList: View {
     let event: EventRecord
-    @Binding var selectedTopic: TopicRecord?
+    @Binding var selectedTopic: TopicSelection
     @State.SharedReader(value: []) private var topics: Topics.Value
 
     var body: some View {
-        List(topics, selection: $selectedTopic.topicSelection) { row in
+        List(topics, selection: $selectedTopic) { row in
             HStack {
                 Text(row.topic?.name ?? "All Videos")
                 Spacer()
                 Text("\(row.watched, format: .number)/\(row.total, format: .number)")
             }
-            .tag(row.topic.topicTag)
+            .tag(row.selection)
         }
         .listStyle(.sidebar)
         .task(id: event) {
@@ -94,60 +94,9 @@ private extension TopicList {
         var topic: TopicRecord?
         var watched: Int
         var total: Int
-    }
-}
 
-// MARK: - Multiplatform Selection Hackery
-#if os(macOS)
-private enum TopicSelection: Hashable, Identifiable {
-    var id: Self { self }
-
-    case none
-    case some(TopicRecord)
-}
-
-private extension Optional where Wrapped == TopicRecord {
-    var topicSelection: TopicSelection {
-        get {
-            switch self {
-            case .none: .none
-            case let .some(value): .some(value)
-            }
-        }
-        set {
-            switch newValue {
-            case .none: self = .none
-            case let .some(value): self = value
-            }
-        }
-    }
-}
-#else
-typealias TopicSelection = TopicRecord??
-
-private extension Optional where Wrapped == TopicRecord {
-    var topicSelection: TopicRecord?? {
-        get {
-            switch self {
-            case .none: nil
-            case let value?: .some(value)
-            }
-        }
-        set {
-            switch newValue {
-            case nil, .some(.none): self = nil
-            case let .some(value)?: self = value
-            }
-        }
-    }
-}
-#endif
-
-private extension Optional where Wrapped == TopicRecord {
-    var topicTag: TopicSelection {
-        switch self {
-        case .none: .none
-        case let value?: .some(value)
+        var selection: TopicSelectionTag {
+            TopicSelectionTag(topic: topic)
         }
     }
 }

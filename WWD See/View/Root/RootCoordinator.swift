@@ -29,7 +29,7 @@ class RootCoordinator {
         }
     }
 
-    var selectedTopic: TopicRecord?
+    var selectedTopic = TopicSelection.defaultValue
 }
 
 private struct Events: FetchKeyRequest {
