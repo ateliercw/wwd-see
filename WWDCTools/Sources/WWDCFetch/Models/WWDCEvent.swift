@@ -7,6 +7,7 @@
 
 import Foundation
 import Fuzi
+import Dependencies
 
 public struct WWDCEvent: Codable, Identifiable, Hashable, Sendable {
     public var id: Self { self }
@@ -17,7 +18,8 @@ public struct WWDCEvent: Codable, Identifiable, Hashable, Sendable {
 }
 
 extension WWDCEvent {
-    public init(url: URL, data: Data) throws {
+    init(url: URL) async throws {
+        let (data, _) = try await Dependency(\.urlSession).wrappedValue.data(from: url)
         let document = try HTMLDocument(data: data)
         let name = document.firstChild(css: ".collection-title")?
             .firstChild(xpath: ".//text()")?
@@ -25,11 +27,12 @@ extension WWDCEvent {
         guard let name else {
             throw Failure.badData
         }
-        let fragments = try [WWDCVideoFragment](data: data, eventName: name)
-        self = .init(
-            name: name,
-            url: url,
-            fragments: fragments
-        )
+        self.name = name
+        self.url = url
+        let fragmentNodes = document.css(".vc-card")
+        self.fragments = try fragmentNodes.map {
+            try WWDCVideoFragment.init(element:$0, event: name)
+        }
     }
 }
+

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import GRDB
+import SharingGRDB
 
 public struct EventRecord: FetchableRecord, PersistableRecord, TableRecord, Identifiable, Codable, Hashable, Sendable {
     public static let databaseTableName: String = "event"

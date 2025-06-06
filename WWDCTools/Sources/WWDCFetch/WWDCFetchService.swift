@@ -1,12 +1,15 @@
 import Foundation
 import WWDCData
+import Dependencies
 import Fuzi
 
 public enum WWDCFetchService {
-    private static let session = URLSession.shared
+    private static var session: URLSession {
+        Dependency(\.urlSession).wrappedValue
+    }
 
     public static func fetchAllTopics() async throws -> [WWDCTopic] {
-        let (data, _) = try await Self.session.data(from: .topicsURL)
+        let (data, _) = try await session.data(from: .topicsURL)
         return try await [WWDCTopic](data: data)
     }
 
@@ -24,8 +27,7 @@ public enum WWDCFetchService {
                     throw Failure.badData
                 }
                 group.addTask {
-                    let (data, _) = try await Self.session.data(from: eventURL)
-                    return try WWDCEvent(url: eventURL, data: data)
+                    return try await WWDCEvent(url: eventURL)
                 }
             }
             var results = [WWDCEvent]()
@@ -42,11 +44,6 @@ public enum WWDCFetchService {
                 }
             }
         }
-    }
-
-    public static func fetchFragments(_ url: URL) async throws -> [WWDCVideoFragment] {
-        let (data, _) = try await WWDCFetchService.session.data(from: url)
-        return try [WWDCVideoFragment](data: data)
     }
 
     public static func fetchVideo(fragment: WWDCVideoFragment) async throws -> WWDCVideo {

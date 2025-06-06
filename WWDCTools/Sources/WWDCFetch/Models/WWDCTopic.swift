@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Dependencies
 @preconcurrency import Fuzi
 
 public struct WWDCTopic: Codable, Identifiable, Hashable, Sendable {
@@ -19,38 +20,18 @@ public struct WWDCTopic: Codable, Identifiable, Hashable, Sendable {
 }
 
 extension WWDCTopic {
-    @Sendable
-    init(element: Fuzi.XMLElement) async throws {
-        let url = element["href"].flatMap { url in
-            URL(string: url, relativeTo: .baseURL)
+    init(name: String, url: URL, icon: String) async throws {
+        self.name = name
+        self.url = url
+        self.icon = icon
+
+        let session = Dependency(\.urlSession).wrappedValue
+        let (data, _) = try await session.data(from: url)
+        let document = try HTMLDocument(data: data)
+        let fragmentNodes = document.css(".vc-card")
+        self.fragments = try fragmentNodes.map {
+            try WWDCVideoFragment.init(element: $0)
         }
-        let name = element.firstChild(css: ".typography-label")?
-            .childNodes(ofTypes: [.Text])
-            .first?
-            .stringValue
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-        let icon = element.firstChild(css: ".topic-icon")?["src"]
-            .flatMap(URL.init(string:))?
-            .deletingPathExtension()
-            .lastPathComponent
-        guard let name, let url, let icon else {
-            throw Failure.badData
-        }
-
-        self = WWDCTopic(
-            name: name,
-            url: url,
-            icon: icon,
-            fragments: try await WWDCFetchService.fetchFragments(url)
-        )
-    }
-}
-
-actor NodeWrapper {
-    let node: Fuzi.XMLElement
-
-    init(node: Fuzi.XMLElement) {
-        self.node = node
     }
 }
 
@@ -60,9 +41,9 @@ extension Array where Element == WWDCTopic {
         let document = try HTMLDocument(data: data)
         self = try await withThrowingTaskGroup(of: WWDCTopic.self) { group in
             for node in document.css(".tile-link") {
-                let actor = NodeWrapper(node: node)
+                let (name, url, icon) = try node.extractTopicInfo()
                 group.addTask {
-                    try await WWDCTopic(element: await actor.node)
+                    try await WWDCTopic(name: name, url: url, icon: icon)
                 }
             }
             var array = [WWDCTopic]()
@@ -71,5 +52,27 @@ extension Array where Element == WWDCTopic {
             }
             return array.sorted { $0.name < $1.name }
         }
+    }
+}
+
+extension Fuzi.XMLElement {
+    // swiftlint:disable:next large_tuple
+    func extractTopicInfo() throws -> (name: String, url: URL, icon: String) {
+        let url = self["href"].flatMap { url in
+            URL(string: url, relativeTo: .baseURL)
+        }
+        let name = self.firstChild(css: ".typography-label")?
+            .childNodes(ofTypes: [.Text])
+            .first?
+            .stringValue
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        let icon = self.firstChild(css: ".topic-icon")?["src"]
+            .flatMap(URL.init(string:))?
+            .deletingPathExtension()
+            .lastPathComponent
+        guard let name, let url, let icon else {
+            throw Failure.badData
+        }
+        return (name, url, icon)
     }
 }

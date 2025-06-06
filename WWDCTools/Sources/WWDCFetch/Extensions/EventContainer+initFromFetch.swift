@@ -57,7 +57,6 @@ private extension Array where Element == VideoRecord {
                 title: video.title,
                 url: video.url,
                 datePublished: video.datePublished,
-                platforms: video.platforms,
                 duration: video.duration,
                 summary: video.summary,
                 eventUrl: video.event.url

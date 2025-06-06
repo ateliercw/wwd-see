@@ -17,7 +17,6 @@ public struct VideoRecord: FetchableRecord, PersistableRecord, TableRecord, Iden
     public private(set) var url: URL
     public private(set) var sortValue: Int
     public private(set) var datePublished: Date
-    public private(set) var platforms: [String]
     public private(set) var duration: TimeInterval
     public private(set) var summary: String
     public private(set) var eventUrl: URL
@@ -44,7 +43,6 @@ public struct VideoRecord: FetchableRecord, PersistableRecord, TableRecord, Iden
         title: String,
         url: URL,
         datePublished: Date,
-        platforms: [String],
         duration: TimeInterval,
         summary: String,
         eventUrl: URL
@@ -53,7 +51,6 @@ public struct VideoRecord: FetchableRecord, PersistableRecord, TableRecord, Iden
         self.url = url
         self.sortValue = Int(url.lastPathComponent) ?? -1
         self.datePublished = datePublished
-        self.platforms = platforms
         self.duration = duration
         self.summary = summary
         self.eventUrl = eventUrl

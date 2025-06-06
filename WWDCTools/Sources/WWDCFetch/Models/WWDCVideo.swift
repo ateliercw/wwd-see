@@ -16,7 +16,6 @@ public struct WWDCVideo: Codable, Identifiable, Hashable, Sendable {
     public let datePublished: Date
     public var event: WWDCEvent
     public var topics: [WWDCTopic] = []
-    public let platforms: [String]
     public let duration: TimeInterval
     public let summary: String
 
@@ -61,6 +60,5 @@ public extension WWDCVideo {
         self.summary = summary
         self.duration = fragment.duration
         self.event = WWDCEvent(name: "Temp", url: .baseURL, fragments: [])
-        self.platforms = fragment.platforms
     }
 }

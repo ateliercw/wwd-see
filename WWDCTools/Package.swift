@@ -15,6 +15,7 @@ let package = Package(
         .package(url: "https://github.com/cezheng/Fuzi", from: "3.1.3"),
         .package(url: "git@github.com:SimplyDanny/SwiftLintPlugins.git", from: "0.58.2"),
         .package(url: "git@github.com:pointfreeco/sharing-grdb.git", from: "0.1.1"),
+        .package(url: "git@github.com:pointfreeco/swift-dependencies.git", from: "1.0.0"),
         .package(
             url: "https://github.com/apple/swift-argument-parser.git",
             .upToNextMajor(from: "1.5.0")
@@ -34,6 +35,7 @@ let package = Package(
             name: "WWDCFetch",
             dependencies: [
                 .product(name: "Fuzi", package: "Fuzi"),
+                .product(name: "Dependencies", package: "swift-dependencies"),
                 .target(name: "WWDCData")
             ],
             plugins: [
