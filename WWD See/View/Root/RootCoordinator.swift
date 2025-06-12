@@ -16,6 +16,8 @@ class RootCoordinator {
     @ObservationIgnored
     @Dependency(\.defaultDatabase) var database
     @ObservationIgnored
+    @Dependency(\.syncManager) var syncManager
+    @ObservationIgnored
     @SharedReader(.fetch(Events())) var events
     private var needsLoading = true
 
@@ -73,5 +75,6 @@ extension RootCoordinator {
                 try container.videoTopics.forEach { try $0.save(db) }
             }
         }
+        await syncManager?.start()
     }
 }

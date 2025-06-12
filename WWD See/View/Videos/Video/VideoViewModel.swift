@@ -11,13 +11,10 @@ import WWDCData
 
 @Observable
 class VideoViewModel {
-    let video: VideoRecord
-    var info: VideoViewedRecord?
-
     @ObservationIgnored
     @Dependency(\.defaultDatabase) private var database
-    @ObservationIgnored
-    @Dependency(\.videoSyncService) private var syncService
+    let video: VideoRecord
+    var info: VideoViewedRecord?
 
     init(video: VideoRecord, info: VideoViewedRecord?) {
         self.video = video
@@ -27,7 +24,9 @@ class VideoViewModel {
     func toggleHidden() {
         var info = info ?? VideoViewedRecord(videoUrl: video.url)
         info.toggleIgnored()
-        save(info)
+        try? database.write { db in
+            try info.save(db)
+        }
     }
 
     func toggleViewed() {
@@ -36,16 +35,8 @@ class VideoViewModel {
             info.updateIgnored(false)
         }
         info.toggleWatched()
-        save(info)
-    }
-
-    func save(_ info: VideoViewedRecord) {
-        Task { [syncService] in
-            do {
-                try await syncService.update(info: info)
-            } catch {
-                reportIssue(error)
-            }
+        try? database.write { db in
+            try info.save(db)
         }
     }
 

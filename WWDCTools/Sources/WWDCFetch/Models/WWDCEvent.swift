@@ -31,8 +31,7 @@ extension WWDCEvent {
         self.url = url
         let fragmentNodes = document.css(".vc-card")
         self.fragments = try fragmentNodes.map {
-            try WWDCVideoFragment.init(element:$0, event: name)
+            try WWDCVideoFragment.init(element: $0, event: name)
         }
     }
 }
-

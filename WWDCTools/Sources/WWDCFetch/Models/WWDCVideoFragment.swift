@@ -52,4 +52,3 @@ private extension TimeInterval {
         self = minutesValue + secondsValue
     }
 }
-

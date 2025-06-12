@@ -21,7 +21,6 @@ public struct VideoViewedRecord: FetchableRecord, PersistableRecord, TableRecord
     public internal(set) var ignoredUpdated: Date?
     public internal(set) var watchedDate: Date?
     public internal(set) var watchedUpdated: Date?
-    var syncRecord: Data?
 
     public static let video = belongsTo(VideoRecord.self)
     public var video: QueryInterfaceRequest<VideoRecord> {

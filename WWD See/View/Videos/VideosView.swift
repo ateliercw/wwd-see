@@ -15,6 +15,7 @@ struct VideosView: View {
     let topic: TopicRecord?
 
     @State.SharedReader(value: []) private var dates: [(Date, [FullVideo])]
+    @State var query: String = ""
 
     var body: some View {
         List {
@@ -28,14 +29,15 @@ struct VideosView: View {
                 }
             }
         }
-        .task(id: [event, topic] as [AnyHashable]) {
+        .task(id: [event, topic, query] as [AnyHashable]) {
             do {
-                try await $dates.load(.fetch(VideosRequest(event: event, topic: topic)))
+                try await $dates.load(.fetch(VideosRequest(event: event, topic: topic, query: query)))
             } catch {
                 reportIssue(error)
             }
         }
         .navigationTitle(topic?.name ?? event.name)
+        .searchable(text: $query, prompt: "Search")
     }
 }
 
@@ -43,13 +45,22 @@ private extension VideosView {
     struct VideosRequest: FetchKeyRequest {
         let event: EventRecord
         let topic: TopicRecord?
+        let query: String
 
         func fetch(_ db: Database) throws -> [(Date, [FullVideo])] {
-            let request = (topic?.videos.filter(Column("eventUrl") == event.url) ?? event.videos)
-                .order([Column("sortValue"), Column("title")])
-                .including(optional: VideoRecord.viewed)
-
-            let fullVideos = try FullVideo.fetchAll(db, request)
+            let fullVideos: [VideosView.FullVideo]
+            if query.isEmpty {
+                let request = (topic?.videos.filter(Column("eventUrl") == event.url) ?? event.videos)
+                    .order([Column("sortValue"), Column("title")])
+                    .including(optional: VideoRecord.viewed)
+                fullVideos = try FullVideo.fetchAll(db, request)
+            } else {
+                let request = (topic?.videos.filter(Column("eventUrl") == event.url) ?? event.videos)
+                    .filter(Column("title").like("%\(query)%"))
+                    .order([Column("sortValue"), Column("title")])
+                    .including(optional: VideoRecord.viewed)
+                fullVideos = try FullVideo.fetchAll(db, request)
+            }
             let dict = [Date: [FullVideo]](grouping: fullVideos, by: \.video.datePublished)
             return dict.sorted { $0.key < $1.key }
         }
